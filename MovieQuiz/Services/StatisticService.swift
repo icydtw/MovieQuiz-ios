@@ -92,7 +92,7 @@ final class StatisticServiceImplementation: StatisticService {
         }
         set {
             guard let data = try? JSONEncoder().encode(newValue) else {
-                print("Невозможно сохранить результат лучшей игры")
+                print("Невозможно сохранить результат самой лучшей игры")
                 return
             }
             userDefaults.set(data, forKey: Keys.bestGame.rawValue)
@@ -101,14 +101,9 @@ final class StatisticServiceImplementation: StatisticService {
     
     func store(correct count: Int, total amount: Int) { //сохранение лучшего результата
         let newResult = GameRecord(correct: count, total: amount, date: Date().dateTimeString)
-        
         if newResult > bestGame {
-            print("\(newResult.correct) > \(bestGame.correct)")
             bestGame = newResult
         }
-        
         totalAccuracy = 100 * (Double (correct) / Double (10 * gamesCount))
     }
-    
-    
 }
