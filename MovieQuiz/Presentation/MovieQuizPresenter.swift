@@ -3,7 +3,7 @@ import UIKit
 
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     private let statisticService: StatisticService
-    weak var viewController: MovieQuizViewControllerProtocol?
+    private weak var viewController: MovieQuizViewControllerProtocol?
     private var questionFactory: QuestionFactoryProtocol?
     private let questionsAmount: Int = 10
     private var currentQuestionIndex: Int = 0
@@ -33,7 +33,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
     
     func didAnswer(isCorrectAnswer: Bool) {
-        if (isCorrectAnswer) {
+        if isCorrectAnswer {
             correctAnswers += 1
         }
     }
@@ -60,8 +60,8 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         let bestGame = statisticService.bestGame
         
         let totalPlaysCountLine = "Количество сыгранных квизов: \(statisticService.gamesCount)"
-        let currentGameResultLine = "Ваш результат: \(correctAnswers)\\\(questionsAmount)"
-        let bestGameInfoLine = "Рекорд: \(bestGame.correct)\\\(bestGame.total)"
+        let currentGameResultLine = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
+        let bestGameInfoLine = "Рекорд: \(bestGame.correct)/\(bestGame.total)"
         + " (\(bestGame.date.dateTimeString))"
         let averageAccuracyLine = "Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%"
         
