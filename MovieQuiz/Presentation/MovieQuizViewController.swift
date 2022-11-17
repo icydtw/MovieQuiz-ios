@@ -5,8 +5,8 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     @IBOutlet private var questionLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var yesButtonView: UIButton!
-    @IBOutlet weak var noButtonView: UIButton!
+    @IBOutlet private weak var yesButtonView: UIButton!
+    @IBOutlet private weak var noButtonView: UIButton!
     private var statisticService: StatisticService?
     private var presenter: MovieQuizPresenter!
     
@@ -23,11 +23,13 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         yesButtonView.isEnabled = false
+        noButtonView.isEnabled = false
         presenter.yesButtonClicked()
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
         noButtonView.isEnabled = false
+        yesButtonView.isEnabled = false
         presenter.noButtonClicked()
     }
     
