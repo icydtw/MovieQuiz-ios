@@ -3,7 +3,7 @@ import UIKit
 
 class QuestionFactory: QuestionFactoryProtocol {
     private let moviesLoader: MoviesLoading
-    private let delegate: QuestionFactoryDelegate
+    private weak var delegate: QuestionFactoryDelegate?
     
     private var movies: [MostPopularMovie] = []
 
@@ -19,9 +19,9 @@ class QuestionFactory: QuestionFactoryProtocol {
                 switch result {
                 case .success(let mostPopularMovies):
                     self.movies = mostPopularMovies.items
-                    self.delegate.didLoadDataFromServer()
+                    self.delegate?.didLoadDataFromServer()
                 case .failure(let error):
-                    self.delegate.didFailToLoadData(with: error)
+                    self.delegate?.didFailToLoadData(with: error)
                 }
             }
         }
@@ -54,7 +54,7 @@ class QuestionFactory: QuestionFactoryProtocol {
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.delegate.didRecieveNextQuestion(question: question)
+                self.delegate?.didRecieveNextQuestion(question: question)
             }
         }
     }
