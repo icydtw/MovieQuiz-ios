@@ -2,7 +2,7 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
     @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var textLabel: UILabel!
+    @IBOutlet private var questionLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     private var statisticService: StatisticService?
@@ -14,7 +14,6 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         super.viewDidLoad()
         presenter = MovieQuizPresenter(viewController: self)
         imageView.layer.cornerRadius = 20
-        statisticService = StatisticServiceImplementation()
         showLoadingIndicator()
     }
     
@@ -31,7 +30,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     func show(quiz step: QuizStepViewModel) {
         imageView.layer.borderColor = UIColor.clear.cgColor
         imageView.image = step.image
-        textLabel.text = step.question
+        questionLabel.text = step.question
         counterLabel.text = step.questionNumber
     }
     
