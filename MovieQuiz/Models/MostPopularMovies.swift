@@ -2,7 +2,6 @@
 //  MostPopularMovies.swift
 //  MovieQuiz
 //
-//  Created by Илья Тимченко on 04.11.2022.
 //
 
 import Foundation
@@ -27,6 +26,7 @@ struct MostPopularMovie: Codable {
         guard let newURL = URL(string: imageUrlString) else {
             return imageURL
         }
+        
         return newURL
     }
     
